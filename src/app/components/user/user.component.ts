@@ -26,7 +26,8 @@ export class UserComponent implements OnInit {
         street: '50 Main st',
         city: 'Boston',
         state: 'MA'
-      }
+      },
+     
     }
   }
 }
