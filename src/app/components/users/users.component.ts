@@ -6,17 +6,29 @@ import { User } from '../../models/User';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
+  user: User ={
+    firstName: '',
+    lastName: '',
+    age: null,
+    address: {
+      street: '',
+      city: '',
+      state: ''
+    },
+  };
   users: User[];
   showExtend: boolean =true;
   loaded: boolean = false;
-  enableAdd: boolean = false;
+  // enableAdd: boolean = false;
+  currentClasses: boolean = true;
+  showExtended: boolean = true;
+  showUserForm: boolean = false;
   constructor() { }
 
   ngOnInit() {
-    // setTimeout( () => {
       this.users = [
         {
-          firstName: 'John1',
+          firstName: 'John',
           lastName: 'Doe',
           age: 30,
           address: {
@@ -24,7 +36,9 @@ export class UsersComponent implements OnInit {
             city: 'Boston',
             state: 'MA'
           },
-          image: 'http://lorempixel.com/600/600/people/3/'
+          isActive: true,
+          registered: new Date('01/02/2018 08:30:00'),
+          hide: true
         },
         {
           firstName: 'kev',
@@ -35,7 +49,9 @@ export class UsersComponent implements OnInit {
             city: 'Boston',
             state: 'MA'
           },
-          image: 'http://lorempixel.com/600/600/people/2/'
+          isActive: false,
+          registered: new Date('03/12/2018 06:30:00'),
+          hide:true
         },
         {
           firstName: 'stev',
@@ -45,35 +61,31 @@ export class UsersComponent implements OnInit {
             street: '52 Main st',
             city: 'Boston',
             state: 'MA'
-          },
-          image: 'http://lorempixel.com/600/600/people/1/'
+          },        
+          isActive: true,
+          registered: new Date('01/02/2017 05:30:00'),
+          hide:true
         }
       ];
-
       this.loaded = true;
-    // }, 2000)
-    
-    // this.showExtend = false;
-
-    // this.addUser({
-    //   firstName: 'dived',
-    //     lastName: 'Donal',
-    //     // age: 75,
-    //     // address: {
-    //     //   street: '53 Main st',
-    //     //   city: 'Boston',
-    //     //   state: 'MA'
-    //     // }
-    // })
-
-   
-    
   }
-
-  // addUser(user:User){
-   
-  //     this.users.push(user);
-    
-  // }
-
+  addUser(){
+    this.user.isActive = true;
+    this.user.hide = false;
+    this.user.registered= new Date(),
+    this.users.unshift(this.user);
+    this.user = {
+      firstName: '',
+      lastName: '',
+      age: null,
+      address: {
+        street: '',
+        city: '',
+        state: ''
+      },
+    };
+  }
+  onSubmit(e){
+    e.preventDefault();
+  } 
 }
